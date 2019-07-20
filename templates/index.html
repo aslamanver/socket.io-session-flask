@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Flask-SocketIO Test</title>
+    <script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+    
+            var socket = io('http://192.168.1.17:5555/netm_realtime');
+
+            socket.on('connect', () => {
+                console.log('socket.io connected')
+            });
+
+            socket.on('server_response', (msg) => {
+                console.log('server_response', msg)
+            });
+
+            $('#btn-join-room').click(() => {
+                socket.emit('join', $('#room-id').val());
+            });
+
+            $('#btn-leave-room').click(() => {
+                socket.emit('leave', $('#room-id').val());
+            });
+
+            $('#btn-send-room').click(() => {
+                socket.emit('server_event_room', { 'room_id' : $('#room-id').val() });
+            });
+
+            $('#btn-send-broadcast').click(() => {
+                socket.emit('server_event_global', $('#room-id').val());
+            });
+
+        });
+    </script>
+</head>
+<body>
+
+    <h1>Real-time</h1>
+
+    <div>
+        <label>Room ID</label>
+        <input type="text" id="room-id" />
+    </div>
+
+    <div>
+        <label>Message</label>
+        <input type="text" id="msg-body" />
+    </div>
+
+    <div>
+        <button id="btn-join-room">Join Room</button>
+    </div>
+
+    <div>
+        <button id="btn-leave-room">Leave Room</button>
+    </div>
+
+    <div>
+        <button id="btn-send-room">Send Room</button>
+    </div>
+
+    <div>
+        <button id="btn-send-broadcast">Send Broadcast</button>
+    </div>
+
+</body>
+</html>
