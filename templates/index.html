@@ -7,7 +7,7 @@
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function() {
     
-            var socket = io('http://192.168.1.17:5555/netm_realtime');
+            var socket = io('http://127.0.0.1:5555/realtime');
 
             socket.on('connect', () => {
                 console.log('socket.io connected')

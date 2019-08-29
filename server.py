@@ -2,7 +2,7 @@ from flask import Flask, render_template, session, request, copy_current_request
 from flask_socketio import SocketIO, emit, join_room, leave_room, close_room, rooms, disconnect, send
 
 async_mode = None
-namespace = '/netm_realtime'
+namespace = '/realtime'
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
