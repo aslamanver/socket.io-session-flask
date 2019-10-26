@@ -8,6 +8,8 @@ pylint = "*"
 autopep8 = "*"
 
 [packages]
+flask = "*"
+flask-socketio = "*"
 
 [requires]
 python_version = "3.6"
